@@ -97,7 +97,7 @@ export default function Home() {
                 defaultValue={searchQuery}
                 placeholder="Videos para ver hoje..."
               />
-              <button className="py-2 px-4 bg-slate-700 text-white rounded hover:bg-slate-500" onClick={handleClick}>></button>
+              <button className="py-2 px-4 bg-slate-700 text-white rounded hover:bg-slate-500" onClick={handleClick}>{'>'}</button>
             </div>
           </div>
 
