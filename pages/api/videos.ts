@@ -21,7 +21,7 @@ function runMiddleware(req: NextRequest, res: NextResponse, fn: any) {
   })
 }
 
-export default async function videos(req: NextRequest, res: NextResponse) {
+export default async function videos(req: NextRequest | any, res: NextResponse | any) {
 
   await runMiddleware(req, res, cors)
 
