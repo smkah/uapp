@@ -32,7 +32,6 @@ export default function Home() {
   const fetchVideos = async () => {
     try {
       await fetch('api/videos', {
-        credentials: 'omit',
         method: "post",
         headers: {
           'Accept': 'application/json',
