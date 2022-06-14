@@ -18,16 +18,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="Android/Icon-16.png"
+          href="Android/Icon-36.png"
           rel="icon"
           type="image/png"
-          sizes="16x16"
+          sizes="36x36"
         />
         <link
-          href="Android/Icon-32.png"
+          href="Android/Icon-48.png"
           rel="icon"
           type="image/png"
-          sizes="32x32"
+          sizes="48x48"
         />
         <link rel="apple-touch-icon" href="iOS/Icon-32.png"></link>
         <meta name="theme-color" content="#317EFB" />
