@@ -1,6 +1,6 @@
 import * as yt from 'youtube-search-without-api-key';
 import Cors from 'cors'
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextFetchEvent, NextRequest, NextResponse } from 'next/server'
 
 // Initializing the cors middleware
 const cors = Cors({
