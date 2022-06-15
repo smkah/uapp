@@ -12,7 +12,7 @@ interface Video {
 }
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('musica infantil')
+  const [searchQuery, setSearchQuery] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [videos, setVideos] = useState<Video[]>([])
   const [error, setError] = useState('')
@@ -73,42 +73,42 @@ export default function Home() {
 
   return (
     <SearchTextProvider>
-      <div className="bg-slate-200">
+      <div className="bg-gradient-to-tr from-sky-500 to-green-500 h-fit">
         <Head>
           <title>uApp - Videos without Ads</title>
           <meta name="description" content="uApp for you" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className='container mx-auto flex flex-col items-center w-full'>
+        <main className='flex flex-col items-center w-full'>
 
-          <h1 className="text-2xl font-bold m-10 text-slate-800">
+          <h1 className="text-2xl p-10 font-bold text-neutral-800 text-center">
             uApp - Videos without Ads
           </h1>
 
           <div className="flex flex-col items-center space-y-2 w-1/4 mb-5">
             <div className="flex space-x-2 nowrap">
               <input
-                className="focus:ring-slate-800 focus:border-slate-800 block pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                className="focus:ring-neutral-800 focus:border-neutral-800 block pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                 type="text"
                 id="textSearch"
                 name="textSearch"
                 onKeyUp={handleChange}
                 defaultValue={searchQuery}
-                placeholder="Videos para ver hoje..."
+                placeholder="Videos to see today..."
               />
-              <button className="py-2 px-4 bg-slate-700 text-white rounded hover:bg-slate-500" onClick={handleClick}>{'>'}</button>
+              <button className="py-2 px-4 bg-neutral-700 text-white rounded hover:bg-neutral-500" onClick={handleClick}>{'>'}</button>
             </div>
           </div>
 
-          <div className='flex flex-wrap align-middle bg-slate-200'>
+          <div className='flex flex-wrap align-middle px-10'>
 
             {/* {error ? <div className="w-screen">{JSON.stringify(error)}</div> : <div className="w-screen">{JSON.stringify(dados)}</div>} */}
 
-            {videos ? videos.map(({ id, title, duration, views, duration_raw, snippet }) => {
+            {videos.length > 0 ? videos.map(({ id, title, duration, views, duration_raw }) => {
               return (
-                <div key={title} className="lg:w-1/4 lg:p-4 my-2 p-4">
-                  <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id.videoId}`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                <div key={title} className={`lg:w-1/4 lg:p-4 md:w-1/2 md:p-2 sm:w-full my-2 ${true ? 'opacity-100' : 'opacity-0'} transition-opacity ease-in-out duration-1000`}>
+                  <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id.videoId}?wmode=transparent?enablejsapi=1`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   <h3 className="text-sm text-gray-700">
                     <a href="#">
                       <span aria-hidden="true" className="text-clip overflow-hidden">{title}</span>
@@ -123,21 +123,24 @@ export default function Home() {
                 </div>
               )
             })
-              : <div>Loading...</div>
+              : <h1>Nothing to see...</h1>
             }
           </div>
 
         </main>
-
-        <footer>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{' '} Sam
-          </a>
+        <footer className="flex flex-col justify-center items-center py-10">
+          <div>
+            Powered by {' '}
+            <a
+              href="https://github.com/smkah"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sam
+            </a>
+          </div>
         </footer>
+
       </div>
     </SearchTextProvider>
   )
