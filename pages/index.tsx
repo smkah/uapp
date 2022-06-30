@@ -12,7 +12,7 @@ interface Video {
 }
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('infantil')
+  const [searchQuery, setSearchQuery] = useState('adele')
   const [isLoading, setLoading] = useState(false)
   const [videos, setVideos] = useState<Video[]>([])
   const [error, setError] = useState('')
@@ -25,19 +25,17 @@ export default function Home() {
 
   const fetchVideos = async () => {
     try {
-      const rfc3986EncodeURIComponent = (str: string) => encodeURIComponent(str).replace(/[!'()*]/g, escape);
-      // const searchRes = await fetch(`https://www.youtube.com/results?q=${rfc3986EncodeURIComponent(searchQuery.trim())}&hl=en`);
-
-      await fetch(`https://www.youtube.com/results?q=${rfc3986EncodeURIComponent(searchQuery.trim())}&hl=en`, {
-        mode: 'cors',
-        method: "GET",
+      await fetch('api/videos', {
+        method: "post",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({
+          searchQuery
+        })
       }).then((res) => res.json())
         .then((data) => {
-          console.log()
           setVideos(data)
         })
     } catch (error) {
