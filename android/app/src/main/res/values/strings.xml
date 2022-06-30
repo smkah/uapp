@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">uapp</string>
+    <string name="title_activity_main">uapp</string>
+    <string name="package_name">com.h2o.app</string>
+    <string name="custom_url_scheme">com.h2o.app</string>
+</resources>

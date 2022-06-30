@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchTextProvider from '../context/SearchText'
 
 interface Video {
@@ -12,7 +12,7 @@ interface Video {
 }
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('infantil')
   const [isLoading, setLoading] = useState(false)
   const [videos, setVideos] = useState<Video[]>([])
   const [error, setError] = useState('')
@@ -25,17 +25,19 @@ export default function Home() {
 
   const fetchVideos = async () => {
     try {
-      await fetch('api/videos', {
-        method: "post",
+      const rfc3986EncodeURIComponent = (str: string) => encodeURIComponent(str).replace(/[!'()*]/g, escape);
+      // const searchRes = await fetch(`https://www.youtube.com/results?q=${rfc3986EncodeURIComponent(searchQuery.trim())}&hl=en`);
+
+      await fetch(`https://www.youtube.com/results?q=${rfc3986EncodeURIComponent(searchQuery.trim())}&hl=en`, {
+        mode: 'cors',
+        method: "GET",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          searchQuery
-        })
+        }
       }).then((res) => res.json())
         .then((data) => {
+          console.log()
           setVideos(data)
         })
     } catch (error) {
@@ -43,13 +45,13 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    setLoading(true)
-    fetchVideos()
-    setLoading(false)
+  //   setLoading(true)
+  //   fetchVideos()
+  //   setLoading(false)
 
-  }, [searchQuery])
+  // }, [searchQuery])
 
   async function handleClick(e: any) {
     try {
@@ -83,7 +85,7 @@ export default function Home() {
         <main className='flex flex-col items-center w-full'>
 
           <h1 className="text-2xl p-10 font-bold text-neutral-800 text-center">
-            uApp - Videos without Ads
+            uApp - Videos without Ads!
           </h1>
 
           <div className="flex flex-col items-center space-y-2 w-1/4 mb-5">

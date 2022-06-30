@@ -1,0 +1,6 @@
+{
+	"appId": "com.h2o.app",
+	"appName": "uapp",
+	"webDir": "out",
+	"bundledWebRuntime": false
+}

@@ -1,13 +1,18 @@
 {
-  "name": "yapp",
+  "name": "uapp",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@capacitor/android": "^3.6.0",
+    "@capacitor/cli": "^3.6.0",
+    "@capacitor/core": "^3.6.0",
+    "@capacitor/ios": "^3.6.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "next": "^12.1.6",
