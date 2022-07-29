@@ -1,4 +1,4 @@
-package com.h2o.app;
+package com.uapp.app;
 
 import com.getcapacitor.BridgeActivity;
 

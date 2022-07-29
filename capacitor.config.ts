@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.h2o.app',
+  appId: 'com.uapp.app',
   appName: 'uapp',
   webDir: 'out',
   bundledWebRuntime: false
