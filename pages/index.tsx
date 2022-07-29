@@ -1,10 +1,13 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import SearchTextProvider from '../context/SearchText'
+import { youtube } from 'scrape-youtube';
 
 interface Video {
   id?: any
   title?: any
+  thumbnail?: any
   duration?: any
   views?: any
   duration_raw?: any
@@ -18,6 +21,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const [dados, setDados] = useState(null)
   const [online, setOnline] = useState('')
+  const [git, setGit] = useState<any>(null)
 
   useEffect(() => {
     window.navigator.onLine ? setOnline('Online') : setOnline('Offline')
@@ -36,7 +40,8 @@ export default function Home() {
         })
       }).then((res) => res.json())
         .then((data) => {
-          setVideos(data)
+          const { videos } = data;
+          setVideos(videos)
         })
     } catch (error) {
       console.log(error)
@@ -71,9 +76,14 @@ export default function Home() {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 
+  function formatTime(num: any) {
+    const newLocal = num * 1000;
+    return new Date(newLocal).toISOString().substr(11, 8)
+  }
+
   return (
     <SearchTextProvider>
-      <div className="bg-gradient-to-tr from-sky-500 to-green-500 h-fit">
+      <div className="bg-white h-fit">
         <Head>
           <title>uApp - Videos without Ads</title>
           <meta name="description" content="uApp for you" />
@@ -83,7 +93,7 @@ export default function Home() {
         <main className='flex flex-col items-center w-full'>
 
           <h1 className="text-2xl p-10 font-bold text-neutral-800 text-center">
-            uApp - Videos without Ads!
+            uApp - Videos without Ads!!!
           </h1>
 
           <div className="flex flex-col items-center space-y-2 w-1/4 mb-5">
@@ -98,17 +108,18 @@ export default function Home() {
                 placeholder="Videos to see today..."
               />
               <button className="py-2 px-4 bg-neutral-700 text-white rounded hover:bg-neutral-500" onClick={handleClick}>{'>'}</button>
+              {git ? git.name : null}
+
             </div>
           </div>
 
           <div className='flex flex-wrap align-middle px-10'>
 
-            {/* {error ? <div className="w-screen">{JSON.stringify(error)}</div> : <div className="w-screen">{JSON.stringify(dados)}</div>} */}
-
-            {videos.length > 0 ? videos.map(({ id, title, duration, views, duration_raw }) => {
+            {videos.length > 0 ? videos.map(({ id, title, duration, views, duration_raw, thumbnail }) => {
               return (
                 <div key={title} className={`lg:w-1/4 lg:p-4 md:w-1/2 md:p-2 sm:w-full my-2 ${true ? 'opacity-100' : 'opacity-0'} transition-opacity ease-in-out duration-1000`}>
-                  <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id.videoId}?wmode=transparent?enablejsapi=1`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                  {/* <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id}?wmode=transparent?enablejsapi=1`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
+                  {<img src={thumbnail} />}
                   <h3 className="text-sm text-gray-700">
                     <a href="#">
                       <span aria-hidden="true" className="text-clip overflow-hidden">{title}</span>
@@ -116,7 +127,7 @@ export default function Home() {
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{duration}</p>
                   {views > 0 ?
-                    <p className="text-sm font-medium text-gray-900">Duration: {duration_raw} | Views: {formatNumber(views)}</p>
+                    <p className="text-sm font-medium text-gray-900">Duration: {formatTime(duration)} | Views: {formatNumber(views)}</p>
                     :
                     <p className="text-red-600 font-bold">Ao vivo</p>
                   }
@@ -128,6 +139,7 @@ export default function Home() {
           </div>
 
         </main>
+
         <footer className="flex flex-col justify-center items-center py-10">
           <div>
             Powered by {' '}

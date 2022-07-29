@@ -6,7 +6,8 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-mobile": "next build && next export && npx cap sync"
   },
   "dependencies": {
     "@capacitor/android": "^3.6.0",
@@ -20,6 +21,7 @@
     "puppeteer": "^15.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "scrape-youtube": "^2.3.2",
     "youtube-search-without-api-key": "^1.0.7"
   },
   "devDependencies": {

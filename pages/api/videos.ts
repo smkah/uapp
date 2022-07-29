@@ -1,4 +1,5 @@
 import * as yt from 'youtube-search-without-api-key';
+import { youtube } from 'scrape-youtube';
 
 import Cors from 'cors'
 import initMiddleware from '../../libs/middleware'
@@ -16,16 +17,9 @@ export default async function videos(req: any, res: any) {
 
   const { searchQuery } = req.body
 
-  const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
-  await page.goto(`https://www.youtube.com/results?search_query=${searchQuery}`);
-  const videos1 = await page.$$('#meta');
-  console.log(videos1)
+  const videos = await youtube.search(searchQuery, { type: 'video' });
 
-  // await browser.close();
-  const videos = await yt.search(searchQuery);
+  // const videos = await yt.search(searchQuery);
   return res.status(200).json(videos)
-
-
 
 }
