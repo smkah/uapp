@@ -3,7 +3,6 @@ import { youtube } from 'scrape-youtube';
 
 import Cors from 'cors'
 import initMiddleware from '../../libs/middleware'
-import puppeteer from 'puppeteer'
 
 const cors = initMiddleware(
   Cors({

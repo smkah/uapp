@@ -6,19 +6,13 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint",
-    "build-mobile": "next build && next export && npx cap sync"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@capacitor/android": "^3.6.0",
-    "@capacitor/cli": "^3.6.0",
-    "@capacitor/core": "^3.6.0",
-    "@capacitor/ios": "^3.6.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "next": "^12.1.6",
     "next-pwa": "^5.5.4",
-    "puppeteer": "^15.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "scrape-youtube": "^2.3.2",

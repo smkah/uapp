@@ -21,7 +21,6 @@ export default function Home() {
   const [error, setError] = useState('')
   const [dados, setDados] = useState(null)
   const [online, setOnline] = useState('')
-  const [git, setGit] = useState<any>(null)
 
   useEffect(() => {
     window.navigator.onLine ? setOnline('Online') : setOnline('Offline')
@@ -108,8 +107,6 @@ export default function Home() {
                 placeholder="Videos to see today..."
               />
               <button className="py-2 px-4 bg-neutral-700 text-white rounded hover:bg-neutral-500" onClick={handleClick}>{'>'}</button>
-              {git ? git.name : null}
-
             </div>
           </div>
 
@@ -118,8 +115,7 @@ export default function Home() {
             {videos.length > 0 ? videos.map(({ id, title, duration, views, duration_raw, thumbnail }) => {
               return (
                 <div key={title} className={`lg:w-1/4 lg:p-4 md:w-1/2 md:p-2 sm:w-full my-2 ${true ? 'opacity-100' : 'opacity-0'} transition-opacity ease-in-out duration-1000`}>
-                  {/* <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id}?wmode=transparent?enablejsapi=1`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
-                  {<img src={thumbnail} />}
+                  <iframe className="w-full hover:opacity-75 rounded-t mb-2" src={`https://www.youtube.com/embed/${id}?wmode=transparent?enablejsapi=1`} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   <h3 className="text-sm text-gray-700">
                     <a href="#">
                       <span aria-hidden="true" className="text-clip overflow-hidden">{title}</span>
